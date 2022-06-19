@@ -97,12 +97,16 @@ class AuthController:
 
         try:
             data = jwt.decode(refresh_token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            user = repo.get_user_by_id(data['user_id'])
         except Exception as e:
             res.success = False
             res.error = "Refresh Token is invalid."
             return res.to_json(), 401
 
+        user = repo.get_user_by_id(data['user_id'])
+        if user is None:
+            res.success = False
+            res.error = "Refresh Token is invalid."
+            return res.to_json(), 401
         
         access_token, _ = generate_token(user)
 
