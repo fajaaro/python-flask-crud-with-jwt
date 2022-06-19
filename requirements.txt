@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+passlib
+PyMySQL
+python-slugify
+SQLAlchemy
+pyjwt==2.0.0
+datetime
+python-dotenv
