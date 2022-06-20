@@ -1,5 +1,6 @@
 from flask import request
 from slugify import slugify
+from app.helpers.main_helper import MainHelper
 from app.models.product import Product
 from app.models.response import Response
 from app.repositories.product_repository import ProductRepository
@@ -15,7 +16,7 @@ class ProductController:
 
         res = Response(
             success=True,
-            data=[product.to_json() for product in products],
+            data=MainHelper.serialize_objects(products),
             error=None,
             message="Success get products."
         )
@@ -37,7 +38,7 @@ class ProductController:
 
         return res.to_json()
 
-    def store(self):
+    def store(self, user):
         res = Response(success=True)
 
         if not request.is_json:
@@ -52,6 +53,7 @@ class ProductController:
             return res.to_json(), 400
 
         product = Product(
+            user_id = user.id,
             name = request.json.get("name"),
             slug = slugify(request.json.get("name")),
             price = request.json.get("price")

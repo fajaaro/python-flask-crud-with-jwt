@@ -1,5 +1,4 @@
 from app.models.product import Product
-from app import db
 from app.repositories.repository import Repository
 
 class ProductRepository(Repository):

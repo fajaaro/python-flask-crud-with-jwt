@@ -18,7 +18,7 @@ def show(user, id):
 @api_products.route('/', methods = ['POST'])
 @json_web_token
 def store(user):
-    return controller.store()
+    return controller.store(user)
 
 @api_products.route('/<id>', methods = ['PUT'])
 @json_web_token

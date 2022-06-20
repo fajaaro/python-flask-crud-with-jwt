@@ -1,5 +1,4 @@
 from app.models.user import User
-from app import db
 
 from app.repositories.repository import Repository
 

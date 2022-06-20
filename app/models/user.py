@@ -12,6 +12,8 @@ class User(db.Model):
     created_at = db.Column(TIMESTAMP, default = datetime.now, onupdate = None)
     updated_at = db.Column(TIMESTAMP, onupdate = datetime.now)
 
+    products = db.relationship('Product', backref = 'user')
+
     def to_json(self):
         return {
             'id': self.id,
